@@ -11,7 +11,7 @@ resource "google_project" "default" {
 
   # Required for the project to display in any list of Firebase projects.
   labels = {
-    "firebase" = "prod"
+    "firebase" = "enabled"
   }
 }
 
@@ -38,4 +38,11 @@ resource "google_firebase_project" "default" {
   depends_on = [
     google_project_service.default
   ]
+}
+
+resource "google_firebase_project_location" "basic" {
+  provider = google-beta
+  project  = google_firebase_project.default.project
+
+  location_id = "asia-northeast1"
 }
