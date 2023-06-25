@@ -2,8 +2,8 @@
 resource "google_project" "default" {
   provider = google-beta.no_user_project_override
 
-  name       = "terraform-test-koborinai"
-  project_id = "terraform-test-koborinai-1"
+  name       = "terraform-koborinai"
+  project_id = "terraform-koborinai"
 
   # Required for any service that requires the Blaze pricing plan
   # (like Firecbase Authentication with GCIP)
@@ -11,7 +11,7 @@ resource "google_project" "default" {
 
   # Required for the project to display in any list of Firebase projects.
   labels = {
-    "firebase" = "enabled"
+    "firebase" = "prod"
   }
 }
 
@@ -37,16 +37,5 @@ resource "google_firebase_project" "default" {
   project  = google_project.default.project_id
   depends_on = [
     google_project_service.default
-  ]
-}
-
-# Creates a Firebase Android App in the new project created above.
-resource "google_firebase_android_app" "default" {
-  provider     = google-beta
-  project      = google_project.default.project_id
-  display_name = "My Awesome Android app"
-  package_name = "awesome.package.name"
-  depends_on = [
-    google_firebase_project.default,
   ]
 }
