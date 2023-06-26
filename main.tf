@@ -40,9 +40,48 @@ resource "google_firebase_project" "default" {
   ]
 }
 
+resource "google_project_service" "firestore" {
+  project = google_project.default.project_id
+  service = "firestore.googleapis.com"
+}
+
 resource "google_firebase_project_location" "basic" {
   provider = google-beta
   project  = google_firebase_project.default.project
 
   location_id = "asia-northeast1"
 }
+
+resource "google_firestore_database" "database" {
+  project                     = google_project.default.project_id
+  name                        = "(default)"
+  location_id                 = google_firebase_project_location.basic.location_id
+  type                        = "FIRESTORE_NATIVE"
+  concurrency_mode            = "OPTIMISTIC"
+  app_engine_integration_mode = "DISABLED"
+
+  depends_on = [google_project_service.firestore]
+}
+
+# resource "google_identity_platform_project_default_config" "default" {
+#   project  = google_firebase_project.default.project
+#   sign_in {
+#     allow_duplicate_emails = true
+
+#     anonymous {
+#       enabled = true
+#     }
+
+#     email {
+#       enabled           = true
+#       password_required = false
+#     }
+
+#     phone_number {
+#       enabled = true
+#       test_phone_numbers = {
+#         "+11231231234" = "000000"
+#       }
+#     }
+#   }
+# }
