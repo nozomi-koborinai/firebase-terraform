@@ -62,26 +62,3 @@ resource "google_firestore_database" "database" {
 
   depends_on = [google_project_service.firestore]
 }
-
-# resource "google_identity_platform_project_default_config" "default" {
-#   project  = google_firebase_project.default.project
-#   sign_in {
-#     allow_duplicate_emails = true
-
-#     anonymous {
-#       enabled = true
-#     }
-
-#     email {
-#       enabled           = true
-#       password_required = false
-#     }
-
-#     phone_number {
-#       enabled = true
-#       test_phone_numbers = {
-#         "+11231231234" = "000000"
-#       }
-#     }
-#   }
-# }
