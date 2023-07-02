@@ -41,6 +41,7 @@ resource "google_firebase_project" "default" {
   ]
 }
 
+# Firebase プロジェクトを東京リージョンに配置する
 resource "google_firebase_project_location" "default" {
   provider = google-beta
   project  = google_firebase_project.default.project
