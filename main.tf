@@ -3,8 +3,8 @@ resource "google_project" "default" {
   provider = google-beta
 
   # project_id は全世界で一意になる必要がある
-  project_id = var.project_id
-  name       = var.project_name
+  project_id      = var.project_id
+  name            = var.project_name
   billing_account = var.billing_account
 
   # Firebase のプロジェクトとして表示するために必要
@@ -26,7 +26,7 @@ resource "google_project_service" "default" {
     "identitytoolkit.googleapis.com",
     "firebase.googleapis.com",
   ])
-  service = each.key
+  service            = each.key
   disable_on_destroy = false
 }
 
@@ -52,8 +52,8 @@ resource "google_firebase_project_location" "default" {
 # 各種モジュールに locals ファイルを渡す
 # Firebase Firestore
 module "firestore" {
-  source = "./modules/firestore"
-  project_id = var.project_id
-  location = local.region
+  source         = "./modules/firestore"
+  project_id     = var.project_id
+  location       = local.region
   services_ready = google_firebase_project.default
 }
