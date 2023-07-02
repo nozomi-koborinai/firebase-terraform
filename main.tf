@@ -3,8 +3,8 @@ resource "google_project" "default" {
   provider = google-beta
 
   # project_id は全世界で一意になる必要がある
-  project_id = "firebase-terraform-koborinai"
-  name       = "firebase-terraform-koborinai"
+  project_id = var.project_id
+  name       = var.project_name
   billing_account = var.billing_account
 
   # Firebase のプロジェクトとして表示するために必要
@@ -46,5 +46,5 @@ resource "google_firebase_project_location" "default" {
   provider = google-beta
   project  = google_firebase_project.default.project
 
-  location_id = "asia-northeast1"
+  location_id = local.region
 }
