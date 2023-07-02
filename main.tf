@@ -48,3 +48,12 @@ resource "google_firebase_project_location" "default" {
 
   location_id = local.region
 }
+
+# 各種モジュールに locals ファイルを渡す
+# Firebase Firestore
+module "firestore" {
+  source = "./modules/firestore"
+  project_id = var.project_id
+  location = local.region
+  services_ready = google_firebase_project.default
+}
