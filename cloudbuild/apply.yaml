@@ -9,14 +9,14 @@ steps:
 
   - id: "terraform-plan"
     name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
-    args: ["plan", "-lock-timeout=120s", "-var-file=environments/$_ENVIRONMENTS/terraform.tfvars"]
+    args: ["plan", "-lock-timeout=120s", "-var="project_id=$_PROJECT_ID"", "var="project_name=$_PROJECT_NAME"", "-var="billing_account=$_BILLING_ACCOUNT""]
 
   - id: "terraform-apply"
     name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
-    args: ["apply", "-auto-approve", "-lock-timeout=120s", "-var-file=environments/$_ENVIRONMENTS/terraform.tfvars"]
+    args: ["apply", "-auto-approve", "-lock-timeout=120s", "-var="project_id=$_PROJECT_ID"", "var="project_name=$_PROJECT_NAME"", "-var="billing_account=$_BILLING_ACCOUNT""]
 
   - id: "terraform-plan-check"
     name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
-    args: ["plan", "-detailed-exitcode", "-lock-timeout=120s", "-var-file=environments/$_ENVIRONMENTS/terraform.tfvars"]
+    args: ["plan", "-detailed-exitcode", "-lock-timeout=120s", "-var="project_id=$_PROJECT_ID"", "var="project_name=$_PROJECT_NAME"", "-var="billing_account=$_BILLING_ACCOUNT""]
 
 timeout: "3600s"
