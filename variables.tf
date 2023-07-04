@@ -12,8 +12,3 @@ variable "project_id" {
   description = "Firebase プロジェクトの ID（世界で一意となるコード）"
   type        = string
 }
-
-variable "bucket_name" {
-  description = ".tfstate ファイルが保存される Cloud Storage バケットの名前"
-  type        = string
-}

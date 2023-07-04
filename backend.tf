@@ -1,5 +1,5 @@
 terraform {
   backend "gcs" {
-    bucket = var.bucket_name
+    bucket = "firebase-terraform-koborinai-backend"
   }
 }
