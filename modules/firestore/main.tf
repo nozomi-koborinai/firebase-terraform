@@ -1,7 +1,7 @@
 # Firebase Firestore インスタンス
 resource "google_firestore_database" "default" {
   project          = var.project_id
-  name             = "database"
+  name             = "(default)"
   location_id      = var.location
   type             = "FIRESTORE_NATIVE"
   concurrency_mode = "OPTIMISTIC"
