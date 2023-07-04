@@ -9,6 +9,6 @@ steps:
 
   - id: "terraform-plan"
     name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
-    args: ["plan", "-lock-timeout=120s", "-var="project_id=$_PROJECT_ID"", "var="project_name=$_PROJECT_NAME"", "-var="billing_account=$_BILLING_ACCOUNT""]
+    args: ["plan", "-lock-timeout=120s", "-var=project_id=${_PROJECT_ID}", "-var=project_name=${_PROJECT_NAME}", "-var=billing_account=${_BILLING_ACCOUNT}"]
 
 timeout: "3600s"
