@@ -50,10 +50,17 @@ resource "google_firebase_project_location" "default" {
 }
 
 # 各種モジュールに locals ファイルを渡す
-# Firebase Firestore
+## Firebase Firestore
 module "firestore" {
   source         = "./modules/firestore"
   project_id     = var.project_id
   location       = local.region
+  services_ready = google_firebase_project.default
+}
+
+## Firebase Authentication
+module "authentication" {
+  source         = "./modules/authentication"
+  project_id     = var.project_id
   services_ready = google_firebase_project.default
 }
