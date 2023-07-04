@@ -1,0 +1,14 @@
+steps:
+  - id: "terraform-fmt-check"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["fmt", "-check", "-diff"]
+
+  - id: "terraform-init"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["init"]
+
+  - id: "terraform-plan"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["plan", "-lock-timeout=120s", "-var-file=environments/$_ENVIRONMENTS/terraform.tfvars"]
+
+timeout: "3600s"
