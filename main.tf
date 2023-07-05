@@ -2,7 +2,7 @@
 resource "google_project" "default" {
   provider = google-beta
 
-  # project_id は全世界で一意になる必要がある
+  # project_id は一意である必要がある
   project_id      = var.project_id
   name            = var.project_name
   billing_account = var.billing_account
