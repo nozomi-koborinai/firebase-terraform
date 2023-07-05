@@ -2,7 +2,7 @@
 resource "google_project" "default" {
   provider = google-beta
 
-  # project_id は全世界で一意になる必要がある
+  # project_id は一意である必要がある
   project_id      = var.project_id
   name            = var.project_name
   billing_account = var.billing_account
@@ -25,6 +25,9 @@ resource "google_project_service" "default" {
     "serviceusage.googleapis.com",
     "identitytoolkit.googleapis.com",
     "firebase.googleapis.com",
+    "firebaserules.googleapis.com",
+    "firebasestorage.googleapis.com",
+    "storage.googleapis.com",
   ])
   service            = each.key
   disable_on_destroy = false
@@ -50,6 +53,13 @@ resource "google_firebase_project_location" "default" {
 }
 
 # 各種モジュールに locals ファイルを渡す
+## Firebase Authentication
+module "authentication" {
+  source         = "./modules/authentication"
+  project_id     = var.project_id
+  services_ready = google_firebase_project.default
+}
+
 ## Firebase Firestore
 module "firestore" {
   source         = "./modules/firestore"
@@ -58,9 +68,11 @@ module "firestore" {
   services_ready = google_firebase_project.default
 }
 
-## Firebase Authentication
-module "authentication" {
-  source         = "./modules/authentication"
-  project_id     = var.project_id
-  services_ready = google_firebase_project.default
+## Firebase Cloud Storage
+module "storage" {
+  source           = "./modules/storage"
+  project_id       = var.project_id
+  location         = local.region
+  services_ready_1 = module.firestore.firestore_database
+  services_ready_2 = google_firebase_project.default
 }
