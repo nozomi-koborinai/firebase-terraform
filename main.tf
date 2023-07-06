@@ -87,3 +87,15 @@ resource "google_firebase_web_app" "default" {
     google_firebase_project.default,
   ]
 }
+
+## Firebase Android App
+resource "google_firebase_android_app" "default" {
+  provider     = google-beta
+  project      = var.project_id
+  display_name = "My Android App"
+  package_name = var.android_package_name
+
+  depends_on = [
+    google_firebase_project.default,
+  ]
+}
