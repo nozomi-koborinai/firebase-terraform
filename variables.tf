@@ -12,3 +12,13 @@ variable "project_id" {
   description = "Firebase プロジェクトの ID（世界で一意となるコード）"
   type        = string
 }
+
+variable "android_package_name" {
+  description = "パッケージ名（Android）"
+  type       = string
+}
+
+variable "ios_bundle_id" {
+  description = "バンドルID（iOS）"
+  type        = string
+}
