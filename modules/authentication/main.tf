@@ -13,7 +13,7 @@ resource "google_identity_platform_project_default_config" "default" {
   sign_in {
     allow_duplicate_emails = true
     anonymous {
-      enabled = false
+      enabled = true
     }
     email {
       enabled           = true
