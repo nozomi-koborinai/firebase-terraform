@@ -15,7 +15,7 @@ variable "project_id" {
 
 variable "android_package_name" {
   description = "パッケージ名（Android）"
-  type       = string
+  type        = string
 }
 
 variable "ios_bundle_id" {
