@@ -76,3 +76,14 @@ module "storage" {
   services_ready_1 = module.firestore.firestore_database
   services_ready_2 = google_firebase_project.default
 }
+
+## Firebase Web App
+resource "google_firebase_web_app" "default" {
+  provider     = google-beta
+  project      = var.project_id
+  display_name = "My Web App"
+
+  depends_on = [
+    google_firebase_project.default,
+  ]
+}
