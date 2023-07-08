@@ -1,0 +1,18 @@
+steps:
+  - id: "terraform-fmt-check"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["fmt", "-check", "-diff"]
+
+  - id: "terraform-init"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["init"]
+
+  - id: "terraform-plan"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["plan", "-lock-timeout=120s", "-var=project_id=${_PROJECT_ID}", "-var=project_name=${_PROJECT_NAME}", "-var=billing_account=${_BILLING_ACCOUNT}", "-var=android_package_name=${_ANDROID_PACKAGE_NAME}", "-var=ios_bundle_id=${_IOS_BUNDLE_ID}"]
+
+  - id: "terraform-apply"
+    name: "hashicorp/terraform:$_TERRAFORM_CLIENT_VERSION"
+    args: ["apply", "-auto-approve", "-lock-timeout=120s", "-var=project_id=${_PROJECT_ID}", "-var=project_name=${_PROJECT_NAME}", "-var=billing_account=${_BILLING_ACCOUNT}", "-var=android_package_name=${_ANDROID_PACKAGE_NAME}", "-var=ios_bundle_id=${_IOS_BUNDLE_ID}"]
+
+timeout: "3600s"
