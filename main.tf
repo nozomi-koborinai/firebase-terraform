@@ -65,7 +65,8 @@ module "firestore" {
   source         = "./modules/firestore"
   project_id     = var.project_id
   location       = local.region
-  services_ready = google_firebase_project.default
+  services_ready_1 = google_firebase_project.default
+  services_ready_2 = google_project_service.default
 }
 
 ## Firebase Cloud Storage

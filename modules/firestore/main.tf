@@ -8,15 +8,17 @@ resource "google_firestore_database" "default" {
   app_engine_integration_mode = "DISABLED"
 
   depends_on = [
-    var.services_ready
+    var.services_ready_1,
+    var.services_ready_2,
   ]
 }
 
 # Firebase Firestore コレクション／ドキュメント定義
-resource "google_firestore_document" "mydoc" {
-  project     = var.project_id
-  collection  = "somenewcollection"
-  document_id = "my-doc-id"
-  fields      = "{\"something\":{\"mapValue\":{\"fields\":{\"akey\":{\"stringValue\":\"avalue\"}}}}}"
-  depends_on  = [google_firestore_database.default]
-}
+# 必要であればコメントをはずして利用してください
+# resource "google_firestore_document" "mydoc" {
+#   project     = var.project_id
+#   collection  = "somenewcollection"
+#   document_id = "my-doc-id"
+#   fields      = "{\"something\":{\"mapValue\":{\"fields\":{\"akey\":{\"stringValue\":\"avalue\"}}}}}"
+#   depends_on  = [google_firestore_database.default]
+# }

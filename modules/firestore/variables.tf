@@ -6,6 +6,10 @@ variable "location" {
   type = string
 }
 
-variable "services_ready" {
+variable "services_ready_1" {
+  type = any
+}
+
+variable "services_ready_2" {
   type = any
 }
