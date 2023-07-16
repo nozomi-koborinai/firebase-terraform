@@ -52,6 +52,41 @@ resource "google_firebase_project_location" "default" {
   location_id = local.region
 }
 
+# Firebase Web App
+resource "google_firebase_web_app" "default" {
+  provider     = google-beta
+  project      = var.project_id
+  display_name = "My Web App"
+
+  depends_on = [
+    google_firebase_project.default,
+  ]
+}
+
+# Firebase Android App
+resource "google_firebase_android_app" "default" {
+  provider     = google-beta
+  project      = var.project_id
+  display_name = "My Android App"
+  package_name = var.android_package_name
+
+  depends_on = [
+    google_firebase_project.default,
+  ]
+}
+
+# Firebase iOS App
+resource "google_firebase_apple_app" "default" {
+  provider     = google-beta
+  project      = var.project_id
+  display_name = "My iOS app"
+  bundle_id    = var.ios_bundle_id
+
+  depends_on = [
+    google_firebase_project.default,
+  ]
+}
+
 # 各種モジュールに locals ファイルを渡す
 ## Firebase Authentication
 module "authentication" {
@@ -75,39 +110,4 @@ module "storage" {
   location         = local.region
   services_ready_1 = module.firestore.firestore_database
   services_ready_2 = google_firebase_project.default
-}
-
-## Firebase Web App
-resource "google_firebase_web_app" "default" {
-  provider     = google-beta
-  project      = var.project_id
-  display_name = "My Web App"
-
-  depends_on = [
-    google_firebase_project.default,
-  ]
-}
-
-## Firebase Android App
-resource "google_firebase_android_app" "default" {
-  provider     = google-beta
-  project      = var.project_id
-  display_name = "My Android App"
-  package_name = var.android_package_name
-
-  depends_on = [
-    google_firebase_project.default,
-  ]
-}
-
-## Firebase iOS App
-resource "google_firebase_apple_app" "default" {
-  provider     = google-beta
-  project      = var.project_id
-  display_name = "My iOS app"
-  bundle_id    = var.ios_bundle_id
-
-  depends_on = [
-    google_firebase_project.default,
-  ]
 }
