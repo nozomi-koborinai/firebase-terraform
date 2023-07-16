@@ -1,6 +1,6 @@
 # Firebase プロジェクト用の Google Cloud プロジェクトを立ち上げる
 resource "google_project" "default" {
-  provider = google-beta
+  provider = google-beta.no_user_project_override
 
   # project_id は一意である必要がある
   project_id      = var.project_id
