@@ -17,7 +17,7 @@ resource "google_identity_platform_project_default_config" "default" {
     }
     email {
       enabled           = true
-      password_required = false
+      password_required = true
     }
     phone_number {
       enabled = true
