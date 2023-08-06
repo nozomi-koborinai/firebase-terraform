@@ -20,7 +20,7 @@ resource "google_identity_platform_project_default_config" "default" {
       password_required = false
     }
     phone_number {
-      enabled = false
+      enabled = true
       test_phone_numbers = {
         "+11231231234" = "000000"
       }
